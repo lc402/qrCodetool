@@ -1,0 +1,44 @@
+#!/usr/local/bin/python3
+
+
+from tkinter import *
+from PIL import Image,ImageTk
+import hashlib
+import time
+import qrcode
+ 
+root = Tk()             #初始化Tk()
+root.title("二维码生成器")
+root.geometry('400x820')
+
+l1 = Label(root, text="二维码内容")
+l1.pack()    #side:LEFT  RTGHT TOP  BOTTOM
+
+Text_text = StringVar()
+Text = Entry(root, textvariable = Text_text)
+Text_text.set("二维码")
+Text.pack()
+
+def QRShow():
+    QR_Data = Text_text.get()
+    img = qrcode.make(QR_Data)
+    img = img.convert("RGBA")
+    #IMGP = img.resize((336,336))
+    IMGP = ImageTk.PhotoImage(img)
+    label.config(image=IMGP,bg='black')
+    label.image=IMGP
+    #IGP = Label(root, image = IMGP, bg = "white")
+    #IGP.IMGP = IMGP
+    #IGP.pack()
+    #IGP.place(x=32,y=470, width=336,height=336)
+
+
+Button1 = Button(root, text="生成QR", command = QRShow,bg = "pink")
+Button1.pack()
+#Button1.place(x=70,y=425,width=70)
+label = Label(root)
+label.pack()
+
+
+
+root.mainloop()
